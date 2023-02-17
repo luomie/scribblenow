@@ -1,0 +1,44 @@
+<html class="" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/normalize.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <title>scriblenow</title>
+</head>
+
+<body>
+    <main>
+        <article>
+            <section class="note">
+                <div class="note__themes">
+                    <ul>
+                        <li><button data-theme="nightowl">Nightowl</button></li>
+                        <li><button data-theme="dracula">Dracula</button></li>
+                        <li><button data-theme="solarised-dark">Solarised Dark</button></li>
+                        <li><button data-theme="nord">Nord</button></li>
+                        <li><button data-theme="gruvbox">Gruvbox</button></li>
+                    </ul>
+                </div>
+                <textarea tabindex="0" class="note__input" name="local-notes" data-note-input
+                    placeholder="Start typing"></textarea>
+                <div class="note__clear">
+                    <button class="note__clear__button" data-clear-note>Clear Note</button>
+                </div>
+            </section>
+        </article>
+    </main>
+    <footer class="footer">
+        <div class="footer__content">
+            <p>A browser only storage solution for temporary notes.</p>
+            <p>Inspired by <a href="https://jotter.space" target="_blank">jotter.space</a> from <a
+                    href="https://andy-bell.co.uk/">Andy Bell</a>.</p>
+            <p>Read more about it on <a href="https://github.com/luomie/scribblenow" target="_blank">Github</a>.</p>
+        </div>
+    </footer>
+    <script type="module" src="main.js"></script>
+</body>
+
+</html>
