@@ -3,4 +3,3 @@ Then one day I saw [jotter.space](https://jotter.space) from [Andy Bell](https:/
 
 That's why I built scribblenow. Data is saved via a simple textfield to the local storage of the browser.
 To resemble an IDE like structure I added different themes to choose from.
-
