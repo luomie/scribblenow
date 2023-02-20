@@ -3,7 +3,6 @@ class LocalStorage {
         this.localStorageKey = localStorageKey;
     }
 
-
     getLocalStorageKey() {
         return this.localStorageKey;
     }
