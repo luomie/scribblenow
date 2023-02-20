@@ -1,5 +1,6 @@
 @import url('normalize.css');
 @import url('themes.css');
+@import url('fonts.css');
 
 :root {
     --global-border-width: 2px;
@@ -13,7 +14,7 @@ body {
     font-size: 18px;
     color: var(--foreground);
     background: var(--background);
-    font-family: monospace;
+    font-family: 'JetBrains Mono', monospace;
     box-sizing: border-box;
 }
 
