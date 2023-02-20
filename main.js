@@ -1,5 +1,7 @@
-import saveNote from "./modules/saveNote.mjs";
-import changeTheme from "./modules/changeTheme.mjs";
+import { Note } from "./modules/Note.mjs";
 
-saveNote();
-changeTheme();
+const noteInput = document.querySelector('[data-note-input]');
+
+if (noteInput) {
+    const app = new Note(noteInput);
+}
