@@ -1,21 +1,22 @@
-class ThemeSwitcher {
-    constructor(note, localStorageItem) {
+import { LocalStorage } from "./LocalStorage.mjs";
+
+class ThemeSwitcher extends LocalStorage {
+    constructor(note) {
+        super();
+
+        this.localStorageKey = super.getLocalStorageKey();
+
         this.note = note;
-        this.localStorageItem = localStorageItem;
+        this.localStorageItemKey = 'theme';
         this.themes = document.querySelectorAll('[data-theme]');
         this.classes = {
             buttonActive: 'active'
         };
-        this.activeTheme = 'default';
         this.html = document.querySelector('html');
 
         this.themes.forEach((button) => {
             button.addEventListener('click', (event) => {
-                const currentButtonTheme = event.currentTarget.dataset.theme;
-
-                this.activeTheme = currentButtonTheme;
-
-                this.setCurrentThemeToLocalStorage();
+                super.setLocalStorageItemValueByKey(this.localStorageItemKey, event.currentTarget.dataset.theme);
                 this.setThemeClass();
                 this.setThemeButtonStateActiveForCurrentTheme();
             })
@@ -23,16 +24,12 @@ class ThemeSwitcher {
 
     }
 
-    getLocalStorageItemParsed() {
-        return localStorage.getItem(this.localStorageItem) ? JSON.parse(localStorage.getItem(this.localStorageItem)) : false;
-    }
-
-    getCurrentThemeInLocalStorage() {
-        return this.getLocalStorageItemParsed().theme;
+    getCurrentThemeInLocalStorage(key) {
+        return super.getLocalStorageItemValue(key);
     }
 
     setThemeClass() {
-        this.html.className = this.html.className.replace(/^theme--[^\s]+/g, `theme--${this.getCurrentThemeInLocalStorage()}`);
+        this.html.className = this.html.className.replace(/^theme--[^\s]+/g, `theme--${this.getCurrentThemeInLocalStorage(this.localStorageItemKey)}`);
     }
 
     setThemeButtonStateActiveForCurrentTheme() {
@@ -41,7 +38,7 @@ class ThemeSwitcher {
     }
 
     setThemeButtonStateActive() {
-        const button = document.querySelector(`[data-theme=${this.getCurrentThemeInLocalStorage()}]`);
+        const button = document.querySelector(`[data-theme=${this.getCurrentThemeInLocalStorage(this.localStorageItemKey)}]`);
 
         button ? button.classList.add(this.classes.buttonActive) : false;
     }
@@ -51,14 +48,6 @@ class ThemeSwitcher {
 
         button ? button.classList.remove(this.classes.buttonActive) : false;
     }
-
-    setCurrentThemeToLocalStorage() {
-        let storage = this.getLocalStorageItemParsed();
-
-        storage.theme = this.activeTheme;
-        localStorage.setItem(this.localStorageItem, JSON.stringify(storage));
-    }
-
 }
 
 export { ThemeSwitcher }

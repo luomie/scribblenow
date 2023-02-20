@@ -1,17 +1,22 @@
+import { LocalStorage } from "./LocalStorage.mjs";
 import { ThemeSwitcher } from "./ThemeSwitcher.mjs";
 
-class Note {
-    constructor(input, localStorageItem = 'note') {
+class Note extends LocalStorage {
+    constructor(input) {
+        super();
+
+        this.localStorageKey = super.getLocalStorageKey();
+
         this.input = input;
-        this.localStorageItem = localStorageItem;
+        this.localStorageItemKey = 'text';
         this.clearNoteInput = document.querySelector('[data-clear-note]');
-        this.themeSwitcher = new ThemeSwitcher(input, localStorageItem);
+        this.themeSwitcher = new ThemeSwitcher(input);
 
         this.loadNote();
         this.loadThemeSwitcher();
 
         this.input.addEventListener('input', (event) => {
-            this.setLocalStorageInput(event.currentTarget.value);
+            super.setLocalStorageItemValueByKey(this.localStorageItemKey, event.currentTarget.value);
         });
 
         this.clearNoteInput.addEventListener('click', () => {
@@ -32,8 +37,8 @@ class Note {
     }
 
     createLocalStorageItem() {
-        if (!this.getLocalStorageItem()) {
-            localStorage.setItem(this.localStorageItem, JSON.stringify({ text: '', theme: '' }));
+        if (!super.getLocalStorageItem()) {
+            localStorage.setItem(this.localStorageKey, JSON.stringify({ text: '', theme: 'theme--nightowl' }));
             return true;
         } else {
             return false;
@@ -41,7 +46,7 @@ class Note {
     }
 
     clearNote() {
-        this.setLocalStorageInput('');
+        super.setLocalStorageItemValueByKey(this.localStorageItemKey, '');
         this.setInput();
     }
 
@@ -52,21 +57,8 @@ class Note {
         });
     }
 
-    getLocalStorageItem() {
-        const storage = localStorage.getItem(this.localStorageItem);
-
-        return storage ? JSON.parse(storage) : false;
-    }
-
     setInput() {
-        this.input.value = this.getLocalStorageItem().text;
-    }
-
-    setLocalStorageInput(text) {
-        let storage = this.getLocalStorageItem();
-
-        storage.text = text;
-        localStorage.setItem(this.localStorageItem, JSON.stringify(storage));
+        this.input.value = super.getLocalStorageItem().text;
     }
 }
 
