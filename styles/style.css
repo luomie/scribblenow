@@ -2,20 +2,45 @@
 @import url('themes.css');
 @import url('fonts.css');
 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 :root {
     --global-border-width: 2px;
     --global-radius: 6px;
     --spacing-base: 1rem;
     --global-padding: calc(var(--spacing-base) * 2);
+    --header-height: 0rem;
+    --header-toggle-height: 2rem;
+    --content-max-width: 1440px;
+    --base-font-size: 18px;
+
+    --color-light: #fefefe;
+    --color-dark: #000000;
 }
 
 html,
 body {
-    font-size: 18px;
+    font-size: var(--base-font-size);
     color: var(--foreground);
     background: var(--background);
     font-family: 'JetBrains Mono', monospace;
     box-sizing: border-box;
+}
+
+main {
+    margin-top: var(--header-toggle-height);
+
+}
+
+main,
+.footer__content {
+    max-width: var(--content-max-width);
+    margin-right: auto;
+    margin-left: auto;
 }
 
 section {
@@ -33,15 +58,15 @@ a:active {
 
 ul {
     display: flex;
-    flex-wrap: wrap;
+    overflow-x: visible;
+    margin: 0;
     padding: 0;
-    justify-content: center;
-    gap: 1.5rem;
-    align-content: center;
     list-style-type: none;
+    gap: 1rem;
+    padding: 1rem;
 }
 
-ul li button,
+ul li,
 .note__clear__button {
     cursor: pointer;
     background: transparent;
@@ -51,12 +76,122 @@ ul li button,
     padding: 0.3rem 0.8rem;
 }
 
+button {
+    background: transparent;
+    border: none;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+ul li {
+    width: 100%;
+    min-width: 150px;
+    padding: 0;
+}
+
+ul li button {
+    white-space: nowrap;
+    font-size: 0.75rem;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 1rem 1rem;
+}
+
 ul li button.active {
     background-color: var(--accent);
     color: var(--foreground);
     font-style: italic;
 }
 
+.footer {
+    border-top: var(--global-border-width) solid var(--accent);
+}
+
+.footer__content {
+    padding: var(--global-padding);
+}
+
+.footer__content p {
+    margin: 0.8rem 0;
+}
+
+.header {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    top: 0;
+    width: 100%;
+    background-color: antiquewhite;
+}
+
+.header__content {
+    width: 100%;
+    overflow: auto hidden;
+    cursor: grab;
+    visibility: hidden;
+    /* workaround to animate height */
+    max-height: 0;
+    transition: max-height 0.3s ease-in;
+}
+
+.header__content--active {
+    max-height: 7rem;
+    height: 100%;
+    visibility: visible;
+}
+
+.header__bar {
+    display: flex;
+    width: 100%;
+    background-color: var(--background-notes);
+    justify-content: center;
+    min-height: var(--header-toggle-height);
+    box-shadow: 1px 1px 2px 0 var(--color-dark);
+}
+
+.header__bar__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: var(--content-max-width);
+    padding-right: var(--global-padding);
+    padding-left: var(--global-padding);
+}
+
+.header__bar__content__logo {
+    color: var(--color-light);
+}
+
+.header__bar__content__toggle {
+    text-transform: uppercase;
+    display: flex;
+}
+
+.header__bar__content__toggle__colors {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    display: block;
+    margin-left: -0.3rem;
+    border: 1px solid var(--color-dark);
+}
+
+.header__bar__content__toggle__colors:first-child {
+    background-color: var(--background);
+}
+
+.header__bar__content__toggle__colors:nth-child(2) {
+    background-color: var(--foreground);
+}
+
+.header__bar__content__toggle__colors:nth-child(3) {
+    background-color: var(--accent);
+}
 
 .note {
     margin-bottom: 1rem;
@@ -72,12 +207,10 @@ ul li button.active {
     background: var(--accent);
 }
 
-
 .note__input {
     width: 100%;
     height: 100%;
     max-height: 70vh;
-    font-size: 1rem;
     color: var(--foreground);
     background: var(--background-notes);
     border-radius: var(--global-radius);
@@ -89,13 +222,4 @@ ul li button.active {
 .note__input:focus,
 .note__input:active {
     outline: none;
-}
-
-.footer {
-    padding: var(--global-padding);
-    border-top: var(--global-border-width) solid var(--accent);
-}
-
-.footer__content p {
-    margin: 0.8rem 0;
 }

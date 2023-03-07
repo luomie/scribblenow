@@ -10,7 +10,8 @@ class ThemeSwitcher extends LocalStorage {
         this.localStorageItemKey = 'theme';
         this.themes = document.querySelectorAll('[data-theme]');
         this.classes = {
-            buttonActive: 'active'
+            buttonActive: 'active',
+            themeContainerActive: 'header__content--active',
         };
         this.html = document.querySelector('html');
 
@@ -22,7 +23,19 @@ class ThemeSwitcher extends LocalStorage {
             })
         });
 
+        const themeContainer = document.querySelector('[data-theme-container]'),
+            toggleThemeContainer = document.querySelector('[data-toggle-theme-container]');
+
+        toggleThemeContainer.addEventListener('click', () => {
+            if (themeContainer.classList.contains(this.classes.themeContainerActive)) {
+                themeContainer.classList.remove(this.classes.themeContainerActive)
+            } else {
+                themeContainer.classList.add(this.classes.themeContainerActive);
+            }
+        });
+
     }
+
 
     getCurrentThemeInLocalStorage(key) {
         return super.getLocalStorageItemValue(key);

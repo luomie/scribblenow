@@ -9,18 +9,32 @@
 </head>
 
 <body>
+    <header class="header">
+        <div class="header__content" data-theme-container>
+            <ul>
+                <li><button data-theme="nightowl">Nightowl</button></li>
+                <li><button data-theme="dracula">Dracula</button></li>
+                <li><button data-theme="solarised-dark">Solarised Dark</button></li>
+                <li><button data-theme="nord">Nord</button></li>
+                <li><button data-theme="gruvbox">Gruvbox</button></li>
+            </ul>
+        </div>
+
+        <div class="header__bar">
+            <div class="header__bar__content">
+                <span class="header__bar__content__logo">scribblenow</span>
+                <button class="header__bar__content__toggle" tabindex="0" data-toggle-theme-container>
+                    <span class="header__bar__content__toggle__colors"></span>
+                    <span class="header__bar__content__toggle__colors"></span>
+                    <span class="header__bar__content__toggle__colors"></span>
+                </button>
+            </div>
+        </div>
+    </header>
     <main>
         <article>
             <section class="note">
-                <div class="note__themes">
-                    <ul>
-                        <li><button data-theme="nightowl">Nightowl</button></li>
-                        <li><button data-theme="dracula">Dracula</button></li>
-                        <li><button data-theme="solarised-dark">Solarised Dark</button></li>
-                        <li><button data-theme="nord">Nord</button></li>
-                        <li><button data-theme="gruvbox">Gruvbox</button></li>
-                    </ul>
-                </div>
+
                 <textarea tabindex="0" class="note__input" name="local-notes" data-note-input
                     placeholder="Start typing"></textarea>
                 <div class="note__clear">
