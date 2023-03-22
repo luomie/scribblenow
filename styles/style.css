@@ -17,6 +17,7 @@
     --header-toggle-height: 2rem;
     --content-max-width: 1440px;
     --base-font-size: 18px;
+    --border-offset: -1px;
 
     --color-light: #fefefe;
     --color-dark: #000000;
@@ -107,7 +108,18 @@ ul li button {
 
 ul li button.active {
     font-style: italic;
-    outline: 3px solid var(--accent);
+    position: relative;
+}
+
+ul li button.active::before {
+    content: '';
+    position: absolute;
+    top: var(--border-offset);
+    right: var(--border-offset);
+    bottom: var(--border-offset);
+    left: var(--border-offset);
+    border: 3px solid var(--accent);
+    border-radius: var(--global-radius);
 }
 
 .footer {
