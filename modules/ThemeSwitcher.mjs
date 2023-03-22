@@ -47,8 +47,9 @@ class ThemeSwitcher extends LocalStorage {
     }
 
     setMetaThemeColor() {
-        document.querySelector('meta[name="theme-color"]')
-            .setAttribute('content', getComputedStyle(document.documentElement).getPropertyValue('--background'));
+        const themeColor = document.querySelector('meta[name="theme-color"]');
+
+        themeColor ? themeColor.setAttribute('content', getComputedStyle(document.documentElement).getPropertyValue('--background')) : '';
     }
 
     setThemeButtonStateActiveForCurrentTheme() {
