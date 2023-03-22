@@ -4,6 +4,7 @@
     --background-notes: hsl(207deg, 95%, 8%);
     --accent: #102a44;
     --anchor: var(--accent);
+    --background-header: #000000;
 }
 
 .theme--nightowl {
