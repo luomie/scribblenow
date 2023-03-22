@@ -33,6 +33,7 @@ class Note extends LocalStorage {
 
     loadThemeSwitcher() {
         this.themeSwitcher.setThemeClass();
+        this.themeSwitcher.setMetaThemeColor();
         this.themeSwitcher.setThemeButtonStateActiveForCurrentTheme();
     }
 

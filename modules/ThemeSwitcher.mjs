@@ -20,6 +20,7 @@ class ThemeSwitcher extends LocalStorage {
                 super.setLocalStorageItemValueByKey(this.localStorageItemKey, event.currentTarget.dataset.theme);
                 this.setThemeClass();
                 this.setThemeButtonStateActiveForCurrentTheme();
+                this.setMetaThemeColor();
             })
         });
 
@@ -43,6 +44,11 @@ class ThemeSwitcher extends LocalStorage {
 
     setThemeClass() {
         this.html.className = this.html.className.replace(/^theme--[^\s]+/g, `theme--${this.getCurrentThemeInLocalStorage(this.localStorageItemKey)}`);
+    }
+
+    setMetaThemeColor() {
+        document.querySelector('meta[name="theme-color"]')
+            .setAttribute('content', getComputedStyle(document.documentElement).getPropertyValue('--background'));
     }
 
     setThemeButtonStateActiveForCurrentTheme() {
